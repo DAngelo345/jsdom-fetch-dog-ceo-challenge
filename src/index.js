@@ -16,13 +16,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function renderBreed(breeds) {
         const main = document.getElementById('dog-breeds')
-        breeds.forEach(breed => {
-            const bre = document.createElement('li');
-            bre.innerText = breed;
-            main.appendChild(bre);
+        const array = Object.keys(breeds)
+        array.forEach(breed => {
+            const name = document.createElement('li');
+            name.innerText = breed;
+            main.appendChild(name);
         });
     }
-    
     
     function renderImg(images) {
         const main = document.getElementById('dog-image-container');
@@ -34,4 +34,28 @@ document.addEventListener('DOMContentLoaded', function() {
                         main.appendChild(img);
             });
     }
+
+    const ulId = document.getElementById('dog-breeds').addEventListener("click", function (e) {
+        if (e.target.matches('li')) {
+            e.target.style.color = 'red';
+        }
+    })
+
+    const dropDown = document.getElementById('breed-dropdown');
+
+    function selectBreed(letter) {
+
+        if (letter.target.value == "a") {
+            //only show dog breeds starting with the letter a
+        }
+        else if (letter.target.value == "b") {
+            //only show dog breeds starting with the letter b
+        }
+
+    }
+
+
+        
+  
+
 });
