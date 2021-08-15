@@ -5,17 +5,25 @@ document.addEventListener('DOMContentLoaded', function() {
   
     const imgUrl = "https://dog.ceo/api/breeds/image/random/4"
     const breedUrl = 'https://dog.ceo/api/breeds/list/all'
+    const main = document.getElementById('dog-breeds')
+    let breedObj;
+
+    getBreeds();
 
     fetch(imgUrl)
         .then(resp => resp.json())
         .then(res => renderImg(res.message))
-    
-    fetch(breedUrl)
+        
+     function getBreeds() {
+        fetch(breedUrl)
         .then(resp => resp.json())
-        .then(res => renderBreed(res.message))
-    
+             .then(res => {
+                 breedObj = res.message
+                 renderBreed(breedObj)
+             })
+    }
+
     function renderBreed(breeds) {
-        const main = document.getElementById('dog-breeds')
         const array = Object.keys(breeds)
         array.forEach(breed => {
             const name = document.createElement('li');
@@ -42,17 +50,38 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
     const dropDown = document.getElementById('breed-dropdown');
-
-    function selectBreed(letter) {
-
-        if (letter.target.value == "a") {
-            //only show dog breeds starting with the letter a
+    dropDown.addEventListener("change", (e) => {
+        if (document.querySelectorAll('li').length < 95) {
+           
+            getBreeds()
         }
-        else if (letter.target.value == "b") {
-            //only show dog breeds starting with the letter b
-        }
+        const liS = document.querySelectorAll('li')
+        const newMain = liS.forEach(li => {
+            if (li.innerText[0].toLowerCase() === e.target.value.toLowerCase()) {
+        
+                main.appendChild(li);
+            }
+            else {
+                li.remove()
+            }     
+    })
+        // if (e.target.value == "a") {
+        // }
+        // else if (e.target.value == "b") {
 
-    }
+        // }
+        
+    })
+    // object.onchange = function(){myScript};
+    // function selectBreed(letter) {
+
+    //     if (letter.target.value == "a") {
+    //         //only show dog breeds starting with the letter a
+    //     }
+    //     else if (letter.target.value == "b") {
+    //         //only show dog breeds starting with the letter b
+    //     }
+    // }
 
 
         

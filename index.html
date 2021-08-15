@@ -24,6 +24,22 @@
 
     <ul id="dog-breeds">
 
+      const dropDown = document.getElementById('breed-dropdown');
+      dropDown.addEventListener("change", (e) => {
+          const filtered = Object.keys(breedObj).filter(dog => dog[0] === e.target.value)
+          // console.log(filtered)
+          renderFiltered(filtered)
+         
+      })
+      function renderFiltered(array) {
+          array.forEach(breed => {
+              const name = document.createElement('li');
+              name.innerText = breed;
+              main.innerHTML = []
+              main.appendChild(name);
+          })
+      }
+
     </ul>
 
   </body>
